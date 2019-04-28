@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h1 v-once>{{ title }}</h1>
+		<p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+		<hr>
+		<p v-html=finishedLink></p>
+	</div>
+	<script>
+	// You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
+		new Vue({
+			el: '#app',
+			data: {
+				title: 'Hello World!',
+				link: 'http://google.com',
+				finishedLink: '<a href="http://google.com">Google</a>'
+			},
+			methods: {
+				sayHello: function() {
+					this.title = 'Hello';
+					return this.title
+				}
+			}
+		})
+	</script>
+</body>
+</html>
