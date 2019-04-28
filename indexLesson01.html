@@ -9,8 +9,6 @@
     <p>{{randomFn()}}</p>
     <!-- 4) Search any image on Google and output it here by binding the "src" attribute -->
     <div>
-
-
         <img style="width:100px;height:100px" v-bind:src='link'>
     </div>
     <br>
@@ -18,6 +16,12 @@
     <div>
         <input type="text" v-bind:value="name"></input>
     </div>
+    <button v-on:click="increase(2, $event)">Click me</button>
+    <p>{{counter}}</p>
+    <p v-on:mousemove="updateCoord">
+        Coordinates: {{x}} , {{y}}
+        - <span v-on:mousemove.stop="">DEAD SPOT</span>
+    </p>
 </div>
 
 <script>
@@ -27,12 +31,23 @@
         data: {
             name: 'Alex',
             age: 49.9,
-            link: 'https://photos.cdn-outlet.com/photos/7543-2-zoomin.jpg'
+            link: 'https://dsgmue3ljxm6j.cloudfront.net/wp-content/uploads/2015/06/travel-to-ireland8.jpg',
+            x: 0,
+            y: 0,
+            counter: 0
         },
         methods: {
             randomFn: function () {
                 return Math.random() * 10
+            },
+            updateCoord: function() {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            increase: function(step, event) {
+                this.counter += step;
             }
+
         }
     })
 
