@@ -7,10 +7,16 @@
 </head>
 <body>
 	<div id="app">
+		<button v-on:click="showAlert">Show Alert</button>
+		<input v-on:keyup.enter="store($event)"></input>
+		<p>{{chars}}</p>
+		<button v-on:click="increase(2, $event)">Click me</button>
 		<h1 v-once>{{ title }}</h1>
+		<p>{{counter}}</p>
 		<p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
 		<hr>
 		<p v-html=finishedLink></p>
+		<p v-on:mousemove="updateCoord">Coordinates: {{x}} , {{y}}</p>
 	</div>
 	<script>
 	// You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
@@ -19,14 +25,33 @@
 			data: {
 				title: 'Hello World!',
 				link: 'http://google.com',
-				finishedLink: '<a href="http://google.com">Google</a>'
+				finishedLink: '<a href="http://google.com">Google</a>',
+				x: 0,
+				y: 0,
+				counter: 0,
+				chars: ''
 			},
 			methods: {
 				sayHello: function() {
 					this.title = 'Hello';
 					return this.title
+				},
+				updateCoord: function(event) {
+					this.x = event.clientX;
+					this.y = event.clientY;
+				},
+				increase: function(step, event) {
+					this.counter = this.counter + step;
+				},
+				showAlert: function(){
+					alert("here is the alert!")
+				},
+				store: function(event) {
+					this.chars = event.target.value
 				}
+
 			}
+
 		})
 	</script>
 </body>

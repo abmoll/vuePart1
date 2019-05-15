@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" >{{name}}</input>
+		<input type="text" v-on:input="changeGreeting"></input>
 		<p>{{ greeting }}</p>
 	</div>
 	<script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>VueJS</title>
+	<link rel="stylesheet" href="./style.css">
+	<script src="vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<p>Current Value: {{value}}</p>
+		<button v-on:click=value++>Increase 1 </button>
+		<button v-on:click='value +=5'>Increase 5 </button>
+		<p>Result: {{result}}</p>
+
+		<div class="demo" @click="attachRed = !attachRed" :class="divClasses"></div>
+		<div class="demo" v-bind:style="myStyle"></div>
+		<div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+		<div class="demo" :class="color"></div>
+		<hr>
+		<input type='text' v-model="color">
+		<input type='text' v-model="width">
+
+
+	</div>
+	<script>
+		// You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
+		new Vue({
+			el: '#app',
+			data: {
+				value: 0,
+				attachRed: false,
+				color: "green",
+				width: 100
+			},
+			computed: {
+				result: function () {
+					return this.value == 11 ? 'You are there' : 'Keep going';
+				},
+				divClasses: function () {
+					return {
+						red: this.attachRed,
+						blue: !this.attachRed
+					}
+				},
+				myStyle: function () {
+					return {
+						backgroundColor: this.color,
+						width: this.width + 'px'
+					}
+				}
+			},
+			watch: {
+				result: function () {
+					var vm = this;
+					setTimeout(function () {
+						vm.value = 0;
+					}, 5000);
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>
